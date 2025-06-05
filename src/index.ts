@@ -11,11 +11,13 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { getImages } from './handler/get-images';
+import { getImages, getImage } from './handler/get-images';
 
 import { Router } from 'itty-router';
 
 const router = Router();
+
+router.get('/images/:id', getImage).get('*', () => new Response('Not found', { status: 404 }));
 
 router.get('/images', getImages).get("*", () => new Response("Not found", { status: 404 }));
 
