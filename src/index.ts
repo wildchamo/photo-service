@@ -11,8 +11,18 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { getImages } from './handler/get-images';
+
+import { Router } from 'itty-router';
+
+const router = Router();
+
+router.get('/images', getImages).get("*", () => new Response("Not found", { status: 404 }));
+
+
+
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		return router.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
