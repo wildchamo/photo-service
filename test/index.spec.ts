@@ -34,8 +34,63 @@ describe('Photo Service', () => {
 		});
 	});
 
-	// it('responds with Hello World! (integration style)', async () => {
-	// 	const response = await SELF.fetch('https://example.com');
-	// 	expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
-	// });
+	describe('POST /images', () => {
+		// it('returns a 200 for a valid endpoint is called', async () => {
+		// 	const response = await SELF.fetch('https://example.com/images', {
+		// 		method: 'POST',
+		// 	});
+		// });
+
+		it('returns a 201 for a valid request', async () => {
+			const payload = {
+				url: 'https://example.com/images',
+				author: 'test',
+			};
+			const response = await SELF.fetch('https://example.com/images', {
+				method: 'POST',
+				body: JSON.stringify(payload),
+			});
+
+			expect(response.status).toBe(201);
+		});
+
+		it('returns a 400 for a invalid request', async () => {
+			const payload = {
+				url: 'https://example.com/images',
+			};
+			const response = await SELF.fetch('https://example.com/images', {
+				method: 'POST',
+				body: JSON.stringify(payload),
+			});
+
+			expect(response.status).toBe(400);
+		});
+
+		it('should create a new image', async () => {
+			const payload = {
+				url: 'https://example.com/images',
+				author: 'test',
+			};
+			const response = await SELF.fetch('https://example.com/images', {
+				method: 'POST',
+				body: JSON.stringify(payload),
+			});
+
+			const json = await response.json();
+
+			expect(json).toEqual(expect.objectContaining(payload));
+		});
+	});
+
+	describe('GET /images/:id', () => {
+		it('returns a 200 for a valid request', async () => {
+			const response = await SELF.fetch('https://example.com/images/3');
+			expect(response.status).toBe(200);
+		});
+
+		it('returns a 404 for a invalid request', async () => {
+			const response = await SELF.fetch('https://example.com/images/100');
+			expect(response.status).toBe(404);
+		});
+	});
 });
