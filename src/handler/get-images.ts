@@ -23,12 +23,14 @@ export async function getImages(request: IRequest, env: Env) {
 			message = 'An unknown error occurred';
 		}
 
+		console.error(message);
+
 		return new Response(JSON.stringify({ error: message }), { status: 500 });
 
 	}
 
 	if (!results.success) {
-		return new Response(JSON.stringify({ error: 'Failed to fetch images' }), { status: 500 });
+		return new Response(('Failed to fetch images'), { status: 500 });
 	}
 
 

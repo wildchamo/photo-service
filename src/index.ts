@@ -26,6 +26,6 @@ router
 
 export default {
 	async fetch(request, env: Env, ctx): Promise<Response> {
-		return router.fetch(request);
+		return router.fetch(request, env);
 	},
 } satisfies ExportedHandler<Env>;
