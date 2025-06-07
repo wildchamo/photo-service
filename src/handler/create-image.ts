@@ -1,5 +1,5 @@
 import { IRequest } from 'itty-router';
-import { ALL_IMAGES } from '../../data/image_store';
+import { ALL_IMAGES } from '../data/image_store';
 
 export async function createImage(request: IRequest) {
 

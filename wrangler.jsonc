@@ -9,7 +9,14 @@
 	"compatibility_date": "2025-06-04",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+		  "binding": "DB",
+		  "database_name": "photo-service",
+		  "database_id": "f405f36f-8c14-4bae-9f02-172ccae93ebf"
+		}
+	  ]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

@@ -11,7 +11,7 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { createImage } from './handler/create/image';
+import { createImage } from './handler/create-image';
 import { getImages, getImage } from './handler/get-images';
 
 import { Router } from 'itty-router';
