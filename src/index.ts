@@ -13,7 +13,7 @@
 
 import { createImage } from './handler/create-image';
 import { getImages, getImage } from './handler/get-images';
-
+import { Env } from './env';
 import { Router } from 'itty-router';
 
 const router = Router();
@@ -25,7 +25,7 @@ router
 	.get("*", () => new Response("Not found", { status: 404 }));
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
+	async fetch(request, env: Env, ctx): Promise<Response> {
 		return router.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
