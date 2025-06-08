@@ -43,17 +43,39 @@ export async function getImages(request: IRequest, env: Env) {
 }
 
 
-export async function getImage(request: IRequest) {
+export async function getImage(request: IRequest, env: Env) {
+	const db = env.DB;
 
-	console.log(request);
+	const imageId = request.params.id;
 
-	const id = request.params.id;
+	let result;
 
-	const image = ALL_IMAGES.find((image) => image.id === parseInt(id));
-	if (!image) {
-		return new Response('Image not found', { status: 404 });
+	try {
+		result = await db.prepare('SELECT i.*, c.display_name AS category_display_name FROM images i INNER JOIN images_categories c ON i.category_id = c.id WHERE i.id = ?1').bind(imageId).first();
+		console.log(result);
+
+	} catch (error) {
+
+		let message
+
+		if (error instanceof Error) {
+			message = error.message;
+		} else {
+			message = 'An unknown error occurred';
+		}
+
+		console.error(message);
+
+		return new Response(JSON.stringify({ error: message }), { status: 500 });
+
 	}
-	return new Response(JSON.stringify(image), {
+
+	if (!result) {
+		return new Response(('Not found'), { status: 404 });
+	}
+
+
+	return new Response(JSON.stringify(result), {
 		status: 200,
 		headers: {
 			'Content-Type': 'application/json',
