@@ -16,7 +16,29 @@
 		  "database_name": "photo-service",
 		  "database_id": "f405f36f-8c14-4bae-9f02-172ccae93ebf"
 		}
-	  ]
+	],
+	"env": {
+		"staging": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "photo-service",
+					"database_id": "123"
+				}
+			]
+		},
+		"production": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "photo-service",
+					"database_id": "123"
+				}
+			]
+		}
+
+	}
+}
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -51,4 +73,3 @@
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
 	 */
 	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
-}
